@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasmine Bedrane - Education Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #0a0f2e;
+    --blue: #1a3a8f;
+    --electric: #2962ff;
+    --cyan: #00e5ff;
+    --gold: #ffd600;
+    --coral: #ff6b6b;
+    --green: #00e676;
+    --white: #f0f4ff;
+    --gray: #8892b0;
+    --card-bg: #101535;
+    --card-border: #1e2a5e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(41,98,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(41,98,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+  .module-tag {
+    display: inline-block;
+    background: var(--electric);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--white) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  header p {
+    color: var(--gray);
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+
+  .progress-bar-wrap {
+    background: var(--card-border);
+    border-radius: 99px;
+    height: 6px;
+    max-width: 400px;
+    margin: 0 auto 50px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--electric), var(--cyan));
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .tab {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--gray);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .tab:hover { border-color: var(--electric); color: var(--white); }
+  .tab.active { background: var(--electric); border-color: var(--electric); color: white; }
+
+  .section { display: none; animation: fadeUp 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--gray);
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .def-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--electric);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .def-card:hover { border-left-color: var(--cyan); }
+  .def-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--electric);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .def-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .def-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #c8d0e8;
+  }
+  .def-body ul {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  .def-body li { margin-bottom: 8px; }
+  .def-body strong { color: var(--cyan); }
+  
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .compare-col {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .compare-col h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .compare-col ul { list-style: none; }
+  .compare-col ul li {
+    font-size: 14px;
+    color: #c8d0e8;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--card-border);
+    line-height: 1.5;
+  }
+  .compare-col ul li:last-child { border-bottom: none; }
+  .compare-col ul li::before { content: '→ '; color: var(--gray); }
+
+  /* FLASHCARDS */
+  .flashcard-wrap { perspective: 1000px; margin-bottom: 20px; }
+  .flashcard {
+    width: 100%;
+    min-height: 240px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    cursor: pointer;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .fc-front, .fc-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+  }
+  .fc-front {
+    background: var(--card-bg);
+    border: 2px solid var(--electric);
+  }
+  .fc-back {
+    background: linear-gradient(135deg, #0d1a4a, #0a0f2e);
+    border: 2px solid var(--cyan);
+    transform: rotateY(180deg);
+  }
+  .fc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gray);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .fc-term {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .fc-def {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--cyan);
+  }
+  .fc-hint { font-size: 12px; color: var(--gray); margin-top: 16px; font-family: 'IBM Plex Mono', monospace; }
+  .fc-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .fc-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  .fc-btn:hover { border-color: var(--electric); }
+  .fc-counter { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--gray); }
+
+  /* CHEAT SHEET */
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .cheat-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .cheat-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .cheat-item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(30,42,94,0.5);
+    font-size: 14px;
+  }
+  .cheat-item:last-child { border: none; }
+  .cheat-key { color: var(--cyan); font-weight: 800; min-width: 90px; flex-shrink: 0; }
+  .cheat-val { color: #a8b4cc; line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    .compare { grid-template-columns: 1fr; }
+    .tabs { gap: 6px; }
+    .tab { font-size: 10px; padding: 7px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="module-tag">ACADEMIC BACKGROUND</div>
+    <h1>Education Portfolio</h1>
+    <p>A comprehensive overview of my academic journey, blending business management strategy with rigorous software engineering training.</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('mcgill')">🍁 McGill (2025-2026)</button>
+    <button class="tab" onclick="showSection('epitech')">💻 Epitech (2022-2026)</button>
+    <button class="tab" onclick="showSection('highschool')">🏫 Highschool (2022)</button>
+    <button class="tab" onclick="showSection('flashcards')">🃏 Key Focus Areas</button>
+    <button class="tab" onclick="showSection('cheatsheet')">📋 Summary Map</button>
+  </div>
+
+  <div id="mcgill" class="section active">
+    <div class="section-title">McGill University</div>
+    <div class="section-sub">DIPLOMA OF BUSINESS MANAGEMENT · MONTRÉAL</div>
+
+    <div class="def-card" style="border-left-color: var(--coral);">
+      <div class="def-num">
+        <span>ACADEMIC FOCUS</span>
+        <span>2025 - 2026</span>
+      </div>
+      <div class="def-title">Business Strategy & Management</div>
+      <div class="def-body">
+        <ul>
+          <li><strong>Strategic Management</strong></li>
+          <li><strong>Business Analytics</strong></li>
+          <li><strong>Corporate Finance</strong></li>
+          <li><strong>Organizational Behavior</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="epitech" class="section">
+    <div class="section-title">Epitech</div>
+    <div class="section-sub">MASTER OF COMPUTER SCIENCE & SOFTWARE ENGINEERING · PARIS</div>
+
+    <div class="def-card" style="border-left-color: var(--electric);">
+      <div class="def-num">
+        <span>ACADEMIC FOCUS</span>
+        <span>2022 - 2026</span>
+      </div>
+      <div class="def-title">Software Engineering</div>
+      <div class="def-body">
+        <strong>GPA:</strong> 3.2/4.0<br><br>
+        <ul>
+          <li><strong>C/C++ Architecture</strong></li>
+          <li><strong>Web Technologies</strong></li>
+          <li><strong>Artificial Intelligence</strong></li>
+          <li><strong>Data Science & Project Management</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="highschool" class="section">
+    <div class="section-title">Saint Laurent La PND Highschool</div>
+    <div class="section-sub">GENERAL BACCALAUREATE WITH HONORS · PARIS</div>
+
+    <div class="def-card" style="border-left-color: var(--green);">
+      <div class="def-num">
+        <span>ACADEMIC FOCUS</span>
+        <span>2022</span>
+      </div>
+      <div class="def-title">Foundational Sciences</div>
+      <div class="def-body">
+        <ul>
+          <li><strong>Mathematics</strong></li>
+          <li><strong>Economics and Socials Science</strong></li>
+          <li><strong>Physics-Chemistry</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="flashcards" class="section">
+    <div class="section-title">Interactive Focus Cards</div>
+    <div class="section-sub">CLICK EACH CARD TO REVEAL THE DETAILS</div>
+
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-front">
+          <div class="fc-label">Institution</div>
+          <div class="fc-term" id="fc-term">McGill University</div>
+          <div class="fc-hint">click to reveal →</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label">Core Focus</div>
+          <div class="fc-def" id="fc-def">Strategic Management, Business Analytics, Corporate Finance, Organizational Behavior.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav">
+      <button class="fc-btn" onclick="prevCard()">← Prev</button>
+      <div class="fc-counter" id="fc-counter">1 / 3</div>
+      <button class="fc-btn" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+
+  <div id="cheatsheet" class="section">
+    <div class="section-title">Education Summary</div>
+    <div class="section-sub">ALL DEGREES AT A GLANCE</div>
+
+    <div class="cheat-grid">
+      <div class="cheat-box">
+        <h3>🍁 McGill</h3>
+        <div class="cheat-item"><span class="cheat-key">Degree</span><span class="cheat-val">Diploma of Business Management</span></div>
+        <div class="cheat-item"><span class="cheat-key">Dates</span><span class="cheat-val">2025 - 2026</span></div>
+        <div class="cheat-item"><span class="cheat-key">Focus</span><span class="cheat-val">Strategy, Analytics, Finance</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>💻 Epitech</h3>
+        <div class="cheat-item"><span class="cheat-key">Degree</span><span class="cheat-val">Master of CS & Software Eng.</span></div>
+        <div class="cheat-item"><span class="cheat-key">Dates</span><span class="cheat-val">2022 - 2026</span></div>
+        <div class="cheat-item"><span class="cheat-key">Focus</span><span class="cheat-val">C/C++, Web, AI, Data Science</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>🏫 Highschool</h3>
+        <div class="cheat-item"><span class="cheat-key">Degree</span><span class="cheat-val">Baccalaureate w/ Honors</span></div>
+        <div class="cheat-item"><span class="cheat-key">Dates</span><span class="cheat-val">2022</span></div>
+        <div class="cheat-item"><span class="cheat-key">Focus</span><span class="cheat-val">Math, Economics, Physics</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const sections = ['mcgill','epitech','highschool','flashcards','cheatsheet'];
+let visitedSections = new Set(['mcgill']);
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick').includes(id)) t.classList.add('active');
+  });
+  visitedSections.add(id);
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = (visitedSections.size / sections.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+const cards = [
+  { term: 'McGill University', def: 'Strategic Management, Business Analytics, Corporate Finance, Organizational Behavior.' },
+  { term: 'Epitech Paris', def: 'GPA: 3.2/4.0 - Focus on C/C++, Web, Artificial Intelligence, Data Science, Project Management.' },
+  { term: 'Saint Laurent La PND', def: 'General Baccalaureate with Honors - Majors in Mathematics, Economics, and Sciences.' }
+];
+
+let currentCard = 0;
+let isFlipped = false;
+
+function updateCard() {
+  document.getElementById('fc-term').textContent = cards[currentCard].term;
+  document.getElementById('fc-def').textContent = cards[currentCard].def;
+  document.getElementById('fc-counter').textContent = (currentCard + 1) + ' / ' + cards.length;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  isFlipped = false;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  fc.classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % cards.length;
+  updateCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
+  updateCard();
+}
+
+updateCard();
+updateProgress();
+</script>
+</body>
+</html>

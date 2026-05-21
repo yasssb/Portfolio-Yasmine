@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasmine Bedrane - Full Interactive CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #0a0f2e;
+    --blue: #1a3a8f;
+    --electric: #2962ff;
+    --cyan: #00e5ff;
+    --gold: #ffd600;
+    --coral: #ff6b6b;
+    --green: #00e676;
+    --white: #f0f4ff;
+    --gray: #8892b0;
+    --card-bg: #101535;
+    --card-border: #1e2a5e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(41,98,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(41,98,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+  .module-tag {
+    display: inline-block;
+    background: var(--electric);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--white) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  header p {
+    color: var(--gray);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 15px;
+    line-height: 1.6;
+  }
+  .contact-bar {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .progress-bar-wrap {
+    background: var(--card-border);
+    border-radius: 99px;
+    height: 6px;
+    max-width: 400px;
+    margin: 0 auto 50px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--electric), var(--cyan));
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .tab {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--gray);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .tab:hover { border-color: var(--electric); color: var(--white); }
+  .tab.active { background: var(--electric); border-color: var(--electric); color: white; }
+
+  .section { display: none; animation: fadeUp 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--gray);
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .def-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--electric);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .def-card:hover { border-left-color: var(--cyan); }
+  .def-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--electric);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .def-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .def-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #c8d0e8;
+  }
+  .def-body ul {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  .def-body li {
+    margin-bottom: 8px;
+  }
+  .def-body strong { color: var(--cyan); }
+  
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .compare-col {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .compare-col h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .compare-col ul { list-style: none; }
+  .compare-col ul li {
+    font-size: 14px;
+    color: #c8d0e8;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--card-border);
+    line-height: 1.5;
+  }
+  .compare-col ul li:last-child { border-bottom: none; }
+  .compare-col ul li::before { content: '→ '; color: var(--gray); }
+
+  .pushback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .pb-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.25s;
+  }
+  .pb-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .pb-card i { font-size: 28px; color: var(--electric); margin-bottom: 15px; }
+  .pb-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--cyan); margin-bottom: 10px; }
+  .pb-body { font-size: 14px; color: #a8b4cc; line-height: 1.6; }
+
+  /* CHEAT SHEET */
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .cheat-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .cheat-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .cheat-item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(30,42,94,0.5);
+    font-size: 14px;
+  }
+  .cheat-item:last-child { border: none; }
+  .cheat-key { color: var(--cyan); font-weight: 800; min-width: 100px; flex-shrink: 0; }
+  .cheat-val { color: #a8b4cc; line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    .compare { grid-template-columns: 1fr; }
+    .tabs { gap: 6px; }
+    .tab { font-size: 11px; padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="module-tag">AVAILABLE PART-TIME: 15TH SEPT 2026 - FEB 2027</div>
+    <h1>Yasmine Bedrane</h1>
+    <p>Merging software engineering rigor with McGill business strategy. Looking for a fast-paced, enriching internship / part-time to sharpen my project execution skills and collaborate with cross-functional teams to build the future of tech.</p>
+    <div class="contact-bar">
+      <span><i class="fa-solid fa-location-dot"></i> Paris, France</span>
+      <span><i class="fa-solid fa-phone"></i> 07 71 65 69 27</span>
+      <span><i class="fa-solid fa-envelope"></i> yasmine.bedrane@epitech.eu</span>
+      <span><i class="fa-brands fa-linkedin"></i> /in/yasminebedrane</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('experience')">💼 Experience</button>
+    <button class="tab" onclick="showSection('education')">🎓 Education</button>
+    <button class="tab" onclick="showSection('projects')">🚀 Projects & Extras</button>
+    <button class="tab" onclick="showSection('skills')">📋 Skills & Tech Stack</button>
+  </div>
+
+  <!-- EXPERIENCE SECTION -->
+  <div id="experience" class="section active">
+    <div class="section-title">Professional Experience</div>
+    <div class="section-sub">INTERNSHIPS & PROFESSIONAL ROLES</div>
+
+    <div class="def-card" style="border-left-color: var(--electric);">
+      <div class="def-num">
+        <span>NUMBERLY — PARIS</span>
+        <span>APRIL - AUGUST 2025</span>
+      </div>
+      <div class="def-title">Data Project Manager Intern</div>
+      <div class="def-body">
+        <ul>
+          <li>Bridged data scientists and marketing teams to lead digital campaigns for major accounts.</li>
+          <li>Executed complex CRM strategies, ensuring 100% on-time delivery of client assets.</li>
+          <li>Analyzed datasets using SQL to monitor performance and optimize client KPIs and ROI.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--cyan);">
+      <div class="def-num">
+        <span>EPITECH — PARIS</span>
+        <span>SEPTEMBER 2024 - MARCH 2025</span>
+      </div>
+      <div class="def-title">Pedagogical Assistant (Part-Time)</div>
+      <div class="def-body">
+        <ul>
+          <li>Mentored junior students in C/C++ and software architecture, fostering a collaborative environment.</li>
+          <li>Evaluated projects and provided technical feedback to improve code quality and logic.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--gold);">
+      <div class="def-num">
+        <span>OXYTEK — PARIS</span>
+        <span>JULY - DECEMBER 2023</span>
+      </div>
+      <div class="def-title">Web & Digital Development Intern</div>
+      <div class="def-body">
+        <ul>
+          <li>Engineered a Generative AI front-end in Angular, integrating APIs for real-time data processing.</li>
+          <li>Developed responsive websites using No-Code tools (Bubble, Dorik) to reduce MVP delivery time.</li>
+          <li>Designed high-fidelity Figma mockups to align client branding with technical feasibility.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION SECTION -->
+  <div id="education" class="section">
+    <div class="section-title">Academic Background</div>
+    <div class="section-sub">DEGREES & CERTIFICATIONS</div>
+
+    <div class="def-card" style="border-left-color: var(--coral);">
+      <div class="def-num">
+        <span>MCGILL UNIVERSITY — MONTRÉAL</span>
+        <span>2025 - 2026</span>
+      </div>
+      <div class="def-title">Diploma of Business Management</div>
+      <div class="def-body">
+        <strong>Focus:</strong> Strategic Management, Business Analytics, Corporate Finance, Organizational Behavior.
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--electric);">
+      <div class="def-num">
+        <span>EPITECH — PARIS</span>
+        <span>2022 - 2026</span>
+      </div>
+      <div class="def-title">Master of Computer Science & Software Engineering</div>
+      <div class="def-body">
+        <strong>GPA:</strong> 3.2/4.0<br>
+        <strong>Focus:</strong> C/C++, Web, Artificial Intelligence, Data Science, Project Management.
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--green);">
+      <div class="def-num">
+        <span>SAINT LAURENT LA PND HIGHSCHOOL — PARIS</span>
+        <span>2022</span>
+      </div>
+      <div class="def-title">General Baccalaureate with Honors</div>
+      <div class="def-body">
+        <strong>Majors:</strong> Mathematics, Economics and Socials Science, Physics-Chemistry.
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS & EXTRAS -->
+  <div id="projects" class="section">
+    <div class="section-title">Projects, Leadership & Hobbies</div>
+    <div class="section-sub">INITIATIVES BEYOND THE CLASSROOM</div>
+
+    <div class="def-card" style="border-left-color: var(--gold);">
+      <div class="def-num">
+        <span>STARTUP PROJECT</span>
+      </div>
+      <div class="def-title">Vigilart | Co-Founder & Product Lead</div>
+      <div class="def-body">
+        <ul>
+          <li>Co-founded a mobile/web platform to track uncredited content and protect digital artist IP.</li>
+          <li>Led the full product lifecycle (research to MVP) and managed the team.</li>
+          <li>Directed 4 developers using Agile Scrum and GitHub Projects to optimize sprint workflows.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pushback-grid">
+      <div class="pb-card" style="text-align: center;">
+        <i class="fa-solid fa-users"></i>
+        <div class="pb-title">E-MMA Association</div>
+        <div class="pb-body">Promoted diversity and inclusion within the tech industry (2022-2023).</div>
+      </div>
+      <div class="pb-card" style="text-align: center;">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <div class="pb-title">Epi-Solidaire</div>
+        <div class="pb-body">Organized charitable initiatives including food drives and clothing collections (2022-2023).</div>
+      </div>
+      <div class="pb-card" style="text-align: center;">
+        <i class="fa-solid fa-compass"></i>
+        <div class="pb-title">Interests & Hobbies</div>
+        <div class="pb-body">Cinema, Geopolitical discussions, Traveling, and Cooking.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS SECTION -->
+  <div id="skills" class="section">
+    <div class="section-title">Technical & Professional Skills</div>
+    <div class="section-sub">COMPLETE CAPABILITY MATRIX</div>
+
+    <div class="cheat-grid">
+      <div class="cheat-box">
+        <h3>🗣️ Languages & Soft Skills</h3>
+        <div class="cheat-item"><span class="cheat-key">Languages</span><span class="cheat-val">French (Native), English (Fluent C1 - Duolingo), Spanish (Intermediate B2)</span></div>
+        <div class="cheat-item"><span class="cheat-key">Soft Skills</span><span class="cheat-val">Autonomy, Communication, Analytical Thinking, Problem Solving, Detail-Oriented</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>💻 Programming & Scripting</h3>
+        <div class="cheat-item"><span class="cheat-key">Data & Logic</span><span class="cheat-val">Python (Data Analysis), C, C++, Assembler</span></div>
+        <div class="cheat-item"><span class="cheat-key">Web/App</span><span class="cheat-val">JavaScript/TypeScript, Dart, PHP</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>🌐 Frameworks & Libraries</h3>
+        <div class="cheat-item"><span class="cheat-key">Frontend</span><span class="cheat-val">React, Next.js, Tailwind CSS</span></div>
+        <div class="cheat-item"><span class="cheat-key">Mobile</span><span class="cheat-val">React Native, Flutter</span></div>
+        <div class="cheat-item"><span class="cheat-key">Backend</span><span class="cheat-val">NestJS</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>⚙️ DevOps, Data & Strategy</h3>
+        <div class="cheat-item"><span class="cheat-key">Databases</span><span class="cheat-val">SQL, MongoDB, REST APIs</span></div>
+        <div class="cheat-item"><span class="cheat-key">CI/CD & OS</span><span class="cheat-val">GIT, GitLab, Jenkins, Docker, Linux, Windows Server, Ubuntu Server</span></div>
+        <div class="cheat-item"><span class="cheat-key">Management</span><span class="cheat-val">Agile Scrum, Product Roadmap Strategy, MVP Development, Jira, Notion, Trello, PowerBI</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const sections = ['experience','education','projects','skills'];
+let visitedSections = new Set(['experience']);
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick').includes(id)) t.classList.add('active');
+  });
+  visitedSections.add(id);
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = (visitedSections.size / sections.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+updateProgress();
+</script>
+</body>
+</html>
