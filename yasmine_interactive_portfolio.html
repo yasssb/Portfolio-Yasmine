@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasmine Bedrane - Interactive Interactive Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --navy: #0a0f2e;
+    --blue: #1a3a8f;
+    --electric: #2962ff;
+    --cyan: #00e5ff;
+    --gold: #ffd600;
+    --coral: #ff6b6b;
+    --green: #00e676;
+    --white: #f0f4ff;
+    --gray: #8892b0;
+    --card-bg: #101535;
+    --card-border: #1e2a5e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(41,98,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(41,98,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 20px 60px; }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+  }
+  .module-tag {
+    display: inline-block;
+    background: var(--electric);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 80px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--white) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  header p {
+    color: var(--gray);
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+  }
+
+  .progress-bar-wrap {
+    background: var(--card-border);
+    border-radius: 99px;
+    height: 6px;
+    max-width: 400px;
+    margin: 0 auto 50px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--electric), var(--cyan));
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.6s ease;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .tab {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--gray);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .tab:hover { border-color: var(--electric); color: var(--white); }
+  .tab.active { background: var(--electric); border-color: var(--electric); color: white; }
+
+  .section { display: none; animation: fadeUp 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--gray);
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .def-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--electric);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .def-card:hover { border-left-color: var(--cyan); }
+  .def-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--electric);
+    margin-bottom: 8px;
+  }
+  .def-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .def-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #c8d0e8;
+  }
+  .def-body ul {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  .def-body strong { color: var(--cyan); }
+  
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .compare-col {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 22px;
+  }
+  .compare-col h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .compare-col ul { list-style: none; }
+  .compare-col ul li {
+    font-size: 14px;
+    color: #c8d0e8;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--card-border);
+    line-height: 1.5;
+  }
+  .compare-col ul li:last-child { border-bottom: none; }
+  .compare-col ul li::before { content: '→ '; color: var(--gray); }
+
+  .pushback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .pb-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: all 0.25s;
+    text-align: center;
+  }
+  .pb-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+  .pb-card i { font-size: 32px; color: var(--electric); margin-bottom: 15px; }
+  .pb-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--cyan); margin-bottom: 10px; }
+  .pb-body { font-size: 14px; color: #a8b4cc; line-height: 1.6; }
+
+  /* FLASHCARDS */
+  .flashcard-wrap { perspective: 1000px; margin-bottom: 20px; }
+  .flashcard {
+    width: 100%;
+    min-height: 240px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    cursor: pointer;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .fc-front, .fc-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+  }
+  .fc-front {
+    background: var(--card-bg);
+    border: 2px solid var(--electric);
+  }
+  .fc-back {
+    background: linear-gradient(135deg, #0d1a4a, #0a0f2e);
+    border: 2px solid var(--cyan);
+    transform: rotateY(180deg);
+  }
+  .fc-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--gray);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .fc-term {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .fc-def {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--cyan);
+  }
+  .fc-hint { font-size: 12px; color: var(--gray); margin-top: 16px; font-family: 'IBM Plex Mono', monospace; }
+  .fc-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .fc-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    transition: all 0.2s;
+  }
+  .fc-btn:hover { border-color: var(--electric); }
+  .fc-counter { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--gray); }
+
+  /* CHEAT SHEET */
+  .cheat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .cheat-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .cheat-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .cheat-item {
+    display: flex;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(30,42,94,0.5);
+    font-size: 14px;
+  }
+  .cheat-item:last-child { border: none; }
+  .cheat-key { color: var(--cyan); font-weight: 800; min-width: 90px; flex-shrink: 0; }
+  .cheat-val { color: #a8b4cc; line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    .compare { grid-template-columns: 1fr; }
+    .tabs { gap: 6px; }
+    .tab { font-size: 10px; padding: 7px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="module-tag">HYBRID TECHNICAL PROFILE</div>
+    <h1>Yasmine Bedrane</h1>
+    <p>Specializing in Data Engineering, Full-Stack Web Ecosystems, and Strategic Project Management.</p>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('overview')">👤 Overview</button>
+    <button class="tab" onclick="showSection('software')">💻 Software & Systems</button>
+    <button class="tab" onclick="showSection('webmobile')">🌐 Web & Mobile</button>
+    <button class="tab" onclick="showSection('devops')">⚙️ DevOps & Data</button>
+    <button class="tab" onclick="showSection('flashcards')">🃏 Skill Cards</button>
+    <button class="tab" onclick="showSection('cheatsheet')">📋 Quick Reference</button>
+  </div>
+
+  <!-- OVERVIEW SECTION -->
+  <div id="overview" class="section active">
+    <div class="section-title">Core Profile Orientations</div>
+    <div class="section-sub">THE THREE PILLARS OF EXPERTISE</div>
+
+    <div class="pushback-grid">
+      <div class="pb-card">
+        <i class="fa-solid fa-chart-line"></i>
+        <div class="pb-title">Data Science</div>
+        <div class="pb-body">Advanced Python modeling, data analysis, and robust SQL/NoSQL database management.</div>
+      </div>
+      <div class="pb-card">
+        <i class="fa-solid fa-globe"></i>
+        <div class="pb-title">Web Engineering</div>
+        <div class="pb-body">Full-stack mastery with React, Vue, NestJS, and Nuxt for scalable enterprise applications.</div>
+      </div>
+      <div class="pb-card">
+        <i class="fa-solid fa-list-check"></i>
+        <div class="pb-title">Project Management</div>
+        <div class="pb-body">Agile methodologies (Scrum), MVP Development, and roadmap strategy via Jira & Notion.</div>
+      </div>
+    </div>
+    
+    <div class="def-card" style="margin-top: 30px;">
+      <div class="def-num">SOFT SKILLS</div>
+      <div class="def-title">Professional Attributes</div>
+      <div class="def-body">
+        <strong>Autonomy</strong> | <strong>Communication</strong> | <strong>Analytical Thinking</strong> | <strong>Problem Solving</strong> | <strong>Detail-Oriented</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOFTWARE & SYSTEMS -->
+  <div id="software" class="section">
+    <div class="section-title">Software Engineering Foundations</div>
+    <div class="section-sub">PROGRAMMING & LOW-LEVEL ARCHITECTURE</div>
+
+    <div class="def-card" style="border-left-color: var(--electric);">
+      <div class="def-num">SYSTEMS & OPTIMIZATION</div>
+      <div class="def-title">C, C++ & Assembler</div>
+      <div class="def-body">
+        Mastery of low-level memory management, hardware interfacing, and high-performance computing. Understanding of CPU architecture through Assembler code.
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--cyan);">
+      <div class="def-num">DATA & AUTOMATION</div>
+      <div class="def-title">Python</div>
+      <div class="def-body">
+        Extensive use in data analysis, backend logic scripting, and creating automated workflows for complex datasets.
+      </div>
+    </div>
+
+    <div class="def-card" style="border-left-color: var(--gold);">
+      <div class="def-num">FUNCTIONAL PARADIGMS</div>
+      <div class="def-title">Haskell</div>
+      <div class="def-body">
+        Application of pure functional programming concepts, mathematical rigor, and strict type systems to build reliable software.
+      </div>
+    </div>
+  </div>
+
+  <!-- WEB & MOBILE -->
+  <div id="webmobile" class="section">
+    <div class="section-title">The Modern Web & Mobile Ecosystem</div>
+    <div class="section-sub">FULL-STACK FRAMEWORKS & CROSS-PLATFORM</div>
+
+    <div class="compare">
+      <div class="compare-col" style="border-top: 3px solid var(--electric);">
+        <h3 style="color: var(--electric);">🌐 Web Frameworks</h3>
+        <ul>
+          <li><strong>React & VueJS:</strong> Building reactive, component-based frontends.</li>
+          <li><strong>Nuxt:</strong> Server-side rendering for optimized Vue applications.</li>
+          <li><strong>NestJS & ExpressJS:</strong> Scalable Node.js server-side architecture.</li>
+          <li><strong>Laravel:</strong> Elegant PHP backend routing and MVC architecture.</li>
+          <li><strong>Languages:</strong> JavaScript & TypeScript native fluency.</li>
+        </ul>
+      </div>
+      <div class="compare-col" style="border-top: 3px solid var(--coral);">
+        <h3 style="color: var(--coral);">📱 Mobile Engineering</h3>
+        <ul>
+          <li><strong>React Native:</strong> Bridging React logic to mobile interfaces.</li>
+          <li><strong>Flutter:</strong> High-performance UI toolkit using Dart.</li>
+          <li><strong>Kotlin:</strong> Modern native Android development.</li>
+          <li><strong>Swift:</strong> Native iOS ecosystem development.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEVOPS & DATA -->
+  <div id="devops" class="section">
+    <div class="section-title">DevOps, Data & Infrastructure</div>
+    <div class="section-sub">DEPLOYMENT PIPELINES & ENVIRONMENTS</div>
+
+    <div class="compare">
+      <div class="compare-col" style="border-top: 3px solid var(--green);">
+        <h3 style="color: var(--green);">⚙️ CI/CD & APIs</h3>
+        <ul>
+          <li><strong>Version Control:</strong> GIT & GitLab repository management.</li>
+          <li><strong>Automation:</strong> Jenkins for continuous integration pipelines.</li>
+          <li><strong>Containerization:</strong> Docker for isolated microservices.</li>
+          <li><strong>Integrations:</strong> REST APIs & Swagger Documentation.</li>
+        </ul>
+      </div>
+      <div class="compare-col" style="border-top: 3px solid var(--cyan);">
+        <h3 style="color: var(--cyan);">🗄️ Databases & OS</h3>
+        <ul>
+          <li><strong>Relational Data:</strong> SQL query optimization & architecture.</li>
+          <li><strong>NoSQL Data:</strong> MongoDB document-based storage.</li>
+          <li><strong>Environments:</strong> Linux, macOS, Windows Server.</li>
+          <li><strong>Administration:</strong> Ubuntu Server & Active Directory.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashcards" class="section">
+    <div class="section-title">Interactive Skill Cards</div>
+    <div class="section-sub">CLICK EACH CARD TO REVEAL THE DETAILS</div>
+
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-front">
+          <div class="fc-label">Tech Stack Area</div>
+          <div class="fc-term" id="fc-term">Mobile Engineering</div>
+          <div class="fc-hint">click to reveal →</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-label">Tools & Frameworks</div>
+          <div class="fc-def" id="fc-def">Flutter, React Native, Kotlin, Swift</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav">
+      <button class="fc-btn" onclick="prevCard()">← Prev</button>
+      <div class="fc-counter" id="fc-counter">1 / 5</div>
+      <button class="fc-btn" onclick="nextCard()">Next →</button>
+    </div>
+  </div>
+
+  <!-- CHEAT SHEET -->
+  <div id="cheatsheet" class="section">
+    <div class="section-title">Complete Stack Summary</div>
+    <div class="section-sub">ALL TECHNOLOGIES AT A GLANCE</div>
+
+    <div class="cheat-grid">
+      <div class="cheat-box">
+        <h3>💻 Programming</h3>
+        <div class="cheat-item"><span class="cheat-key">Core</span><span class="cheat-val">C, C++, Haskell, Assembler</span></div>
+        <div class="cheat-item"><span class="cheat-key">Scripting</span><span class="cheat-val">Python, JavaScript, TypeScript, PHP</span></div>
+        <div class="cheat-item"><span class="cheat-key">Mobile</span><span class="cheat-val">Dart, Kotlin, Swift</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>🌐 Frameworks</h3>
+        <div class="cheat-item"><span class="cheat-key">Frontend</span><span class="cheat-val">React, VueJS, Nuxt</span></div>
+        <div class="cheat-item"><span class="cheat-key">Backend</span><span class="cheat-val">NestJS, ExpressJS, Laravel</span></div>
+        <div class="cheat-item"><span class="cheat-key">Mobile</span><span class="cheat-val">React Native, Flutter</span></div>
+      </div>
+
+      <div class="cheat-box">
+        <h3>⚙️ Infrastructure</h3>
+        <div class="cheat-item"><span class="cheat-key">CI/CD</span><span class="cheat-val">GIT, GitLab, Jenkins, Docker</span></div>
+        <div class="cheat-item"><span class="cheat-key">OS/Admin</span><span class="cheat-val">Linux, macOS, Ubuntu Server, Active Directory</span></div>
+        <div class="cheat-item"><span class="cheat-key">Data/API</span><span class="cheat-val">SQL, MongoDB, REST API, Swagger</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// TAB NAVIGATION
+const sections = ['overview','software','webmobile','devops','flashcards','cheatsheet'];
+let visitedSections = new Set(['overview']);
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.getAttribute('onclick').includes(id)) t.classList.add('active');
+  });
+  visitedSections.add(id);
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = (visitedSections.size / sections.length) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// FLASHCARDS
+const cards = [
+  { term: 'Mobile Engineering', def: 'Flutter, React Native, Kotlin, Swift for hybrid and native development.' },
+  { term: 'Core Programming', def: 'C, C++, Haskell, Python, and Assembler for low-level logic and data analysis.' },
+  { term: 'Web Frameworks', def: 'React, VueJS, Nuxt, NestJS, ExpressJS, and Laravel for full-stack delivery.' },
+  { term: 'DevOps & CI/CD', def: 'GIT, GitLab, Jenkins, and Docker for automated pipelines and containerization.' },
+  { term: 'Project Management', def: 'Agile Scrum, Jira, Trello, Notion, and PowerBI for strategic MVP roadmapping.' }
+];
+
+let currentCard = 0;
+let isFlipped = false;
+
+function updateCard() {
+  document.getElementById('fc-term').textContent = cards[currentCard].term;
+  document.getElementById('fc-def').textContent = cards[currentCard].def;
+  document.getElementById('fc-counter').textContent = (currentCard + 1) + ' / ' + cards.length;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  isFlipped = false;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  fc.classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % cards.length;
+  updateCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
+  updateCard();
+}
+
+// INIT
+updateCard();
+updateProgress();
+</script>
+</body>
+</html>
